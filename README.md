@@ -47,7 +47,7 @@ vulkaninfo
 ![vkcube screenshot](readme/pictures/vkcube.png)
 ====================================================================================================
 
-X11 and XFree86-VidModeExtension (Window):
+X11 and XFree86-VidModeExtension (Window Drawing):
 ```bash
 # Debain
 sudo apt install libxxf86vm-dev
@@ -57,6 +57,22 @@ sudo apt install libxi-dev
 # Fedora
 dnf install libXxf86vm-devel
 dnf install libXi-devel
+```
+
+GLFW (Window):
+```bash
+# Debain
+sudo apt install libglfw3-dev
+```
+
+```bash
+# Fedora
+sudo dnf install glfw-devel
+```
+
+```bash
+# Arch
+sudo pacman -S glfw
 ```
 
 ## Windows
