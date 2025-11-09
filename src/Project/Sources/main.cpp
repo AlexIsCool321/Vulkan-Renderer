@@ -1,5 +1,5 @@
 #include <Application/Application.h>
-
+#include <GLFW/glfw3.h>
 using namespace Application;
 
 int main()

@@ -1,3 +1,5 @@
+#include <Application/Spec/GLFW_Window.h>
+
 #include <Application/IWindow.h>
 
 namespace Application
@@ -33,7 +35,11 @@ namespace Application
 
 	IWindow* Create_Window(int width, int height, const char* title)
 	{
-		IWindow* result = new IWindow();
+		IWindow* result = nullptr;
+
+		#ifdef __linux__
+			result = static_cast<IWindow*>(new GLFW_Window(width, height, title));
+		#endif
 
 		return result;
 	}
