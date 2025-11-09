@@ -1,8 +1,8 @@
-#include <iostream>
+#include <Renderer/Renderer.h>
 
 int main()
 {
-	std::cout << "Hello, World!" << std::endl;
+	Renderer::Init();
 
 	return 0;
 }
