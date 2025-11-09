@@ -44,7 +44,7 @@ or/and
 ```Bash
 vulkaninfo
 ```
-readme/pictures/vkcube.png
+![vkcube screenshot](readme/pictures/vkcube.png)
 ====================================================================================================
 
 X11 and XFree86-VidModeExtension (Window):
