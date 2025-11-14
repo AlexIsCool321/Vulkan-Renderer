@@ -24,6 +24,7 @@ namespace Application
 	void GLFW_Window::Update()
 	{
 		glfwPollEvents();
+		std::cout << "A" << std::endl;
 
 		this->m_running = !glfwWindowShouldClose(this->m_local_window);
 	}
