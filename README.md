@@ -1,5 +1,5 @@
 # What Is This Project?
-This project is a simple renderer made in C++ with Vulkan.
+This project is a simple renderer made in pure C with Vulkan.
 
 
 
