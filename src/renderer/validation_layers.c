@@ -2,8 +2,6 @@
 
 #include "renderer/globals.h"
 
-#include <vulkan/vulkan.h>
-
 
 
 
@@ -56,6 +54,14 @@ VkResult create_debug_utils_messenger_ext (VkInstance instance, const VkDebugUti
 {
 	PFN_vkCreateDebugUtilsMessengerEXT function = (PFN_vkCreateDebugUtilsMessengerEXT)vkGetInstanceProcAddr(instance, "vkCreateDebugUtilsMessengerEXT");
 	if (function == NULL) { return VK_ERROR_EXTENSION_NOT_PRESENT; }
-
+	
 	return function(instance, create_info, allocator, debug_messenger);
+}
+
+VKAPI_ATTR void VKAPI_CALL destroy_debug_utils_messenger_ext (VkInstance instance, VkDebugUtilsMessengerEXT messenger, const VkAllocationCallbacks* allocator)
+{
+	PFN_vkDestroyDebugUtilsMessengerEXT function = (PFN_vkDestroyDebugUtilsMessengerEXT)vkGetInstanceProcAddr(instance, "vkDestroyDebugUtilsMessengerEXT");
+	if (function == NULL) { return; }
+	
+	return function(instance, messenger, allocator);
 }

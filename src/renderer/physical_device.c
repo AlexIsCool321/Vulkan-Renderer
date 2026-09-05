@@ -46,22 +46,22 @@ bool_t get_phsyical_device_graphics_queue (void)
 
 	vkGetPhysicalDeviceQueueFamilyProperties(VK_Physical_Devce, &queue_family_count, queue_families);
 
-	VK_Graphics_Queue = 0;
+	VK_Graphics_Queue_Index = 0;
 	for (uint32_t i = 0; i < queue_family_count; i++)
 	{
 		if (queue_families[i].queueFlags & VK_QUEUE_GRAPHICS_BIT)
 		{
-			VK_Graphics_Queue = i + 1;
+			VK_Graphics_Queue_Index = i + 1;
 		}
 	}
 
-	if (VK_Graphics_Queue == 0)
+	if (VK_Graphics_Queue_Index == 0)
 	{
 		printf ("Failed to find a family queue with a graphics bit!\n");
 		return false;
 	}
 
-	VK_Graphics_Queue--;
+	VK_Graphics_Queue_Index--;
 
 	return true;
 }

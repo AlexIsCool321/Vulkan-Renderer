@@ -76,7 +76,7 @@ sudo pacman -S glfw
 ```
 
 ## Windows
-
+I don't have a windows PC setup at the moment
 
 
 # Credits

@@ -6,6 +6,8 @@
 #include "renderer/instance.h"
 #include "renderer/physical_device.h"
 
+#include "renderer/logical_device.h"
+
 #include "renderer/validation_layers.h"
 
 #endif
