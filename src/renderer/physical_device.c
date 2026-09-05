@@ -31,3 +31,37 @@ bool_t select_physical_device (void)
 
 	return true;
 }
+
+bool_t get_phsyical_device_graphics_queue (void)
+{
+	uint32_t queue_family_count = 0;
+	vkGetPhysicalDeviceQueueFamilyProperties (VK_Physical_Devce, &queue_family_count, NULL);
+	
+	VkQueueFamilyProperties* queue_families = allocate_big_buffer(sizeof(VkQueueFamilyProperties) * queue_family_count);
+	if (queue_families == NULL)
+	{
+		printf ("Failed to allocate memory for queue families!\n");
+		return false;
+	}
+
+	vkGetPhysicalDeviceQueueFamilyProperties(VK_Physical_Devce, &queue_family_count, queue_families);
+
+	VK_Graphics_Queue = 0;
+	for (uint32_t i = 0; i < queue_family_count; i++)
+	{
+		if (queue_families[i].queueFlags & VK_QUEUE_GRAPHICS_BIT)
+		{
+			VK_Graphics_Queue = i + 1;
+		}
+	}
+
+	if (VK_Graphics_Queue == 0)
+	{
+		printf ("Failed to find a family queue with a graphics bit!\n");
+		return false;
+	}
+
+	VK_Graphics_Queue--;
+
+	return true;
+}

@@ -5,5 +5,6 @@
 #include "c_utils.h"
 
 bool_t select_physical_device (void);
+bool_t get_phsyical_device_graphics_queue (void);
 
 #endif
