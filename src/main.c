@@ -18,6 +18,8 @@ int main (int argc, char **argv)
 
 
 	if (create_instance() == false)			{ goto EXIT; }
+	if (select_physical_device() == false)	{ goto EXIT; }
+
 	if (set_up_debug_messanger() == false)	{ goto EXIT; }
 
 
