@@ -1,15 +1,12 @@
 #include "renderer/instance.h"
 
+#include "renderer/globals.h"
+
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
 
 #include <stdio.h>
 #include <stdlib.h>
-
-
-
-
-VkInstance VK_Instance = NULL;
 
 
 
@@ -90,8 +87,16 @@ const char **get_extensions (uint32_t *length)
 
 	for (uint32_t i = 0; i < glfw_count; i++)
 	{
-		ADD_ITEM(extensions, extension_count, glfw_extensions[i]);
+		ADD_ITEM (extensions, extension_count, glfw_extensions[i]);
 	}
+
+
+	// Validation Layers
+	if (using_validation_layers == true)
+	{
+		ADD_ITEM (extensions, extension_count, VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
+	}
+
 
 	if (length != NULL)
 	{
@@ -106,8 +111,14 @@ const char **get_layers (uint32_t *length)
 	const char **layers		= NULL;
 	uint32_t layer_count	= 0;
 
-	
 
+	// Validation Layers
+	if (using_validation_layers == true)
+	{
+		ADD_ITEM (layers, layer_count, "VK_LAYER_KHRONOS_validation");
+	}
+
+	
 	if (length != NULL)
 	{
 		(*length) = layer_count;

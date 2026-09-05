@@ -17,7 +17,8 @@ int main (int argc, char **argv)
 	if (window == NULL) { goto EXIT; }
 
 
-	if (create_instance() == false) { goto EXIT; }
+	if (create_instance() == false)			{ goto EXIT; }
+	if (set_up_debug_messanger() == false)	{ goto EXIT; }
 
 
 	for ( ;; )

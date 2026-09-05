@@ -3,6 +3,6 @@
 
 #include "c_utils.h"
 
-extern bool_t using_validation_layers;
+bool_t set_up_debug_messanger (void);
 
 #endif
