@@ -1,9 +1,24 @@
 #include "renderer/instance.h"
 
+#define GLFW_INCLUDE_NONE
+#include <GLFW/glfw3.h>
+
 #include <stdio.h>
 #include <stdlib.h>
 
+
+
+
 VkInstance VK_Instance = NULL;
+
+
+
+
+const char **get_extensions (uint32_t *length);
+const char **get_layers (uint32_t *length);
+
+
+
 
 bool_t create_instance (void)
 {
@@ -22,6 +37,12 @@ bool_t create_instance (void)
 	};
 	
 
+	uint32_t extension_count = 0;
+	const char **extensions = get_extensions(&extension_count);
+
+	uint32_t layer_count = 0;
+	const char **layers = get_layers(&layer_count);
+
 	const VkInstanceCreateInfo create_info =
 	{
 		.sType						= VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO,
@@ -31,14 +52,19 @@ bool_t create_instance (void)
 
 		.pApplicationInfo			= &application_info,
 
-		.enabledLayerCount			= 0,	// uint32_t
-		.ppEnabledLayerNames		= 0,	// const char* const*
+		.enabledLayerCount			= layer_count,
+		.ppEnabledLayerNames		= layers,
 
-		.enabledExtensionCount		= 0,	// uint32_t
-		.ppEnabledExtensionNames	= 0		// const char* const*
+		.enabledExtensionCount		= extension_count,
+		.ppEnabledExtensionNames	= extensions
 	};
 
+
 	VkResult result = vkCreateInstance(&create_info, NULL, &VK_Instance);
+
+	CLEAN_FREE (extensions);
+	CLEAN_FREE (layers);
+
 	if (result != VK_SUCCESS)
 	{
 		printf ("Failed to create VK Instance! [ %i ]\n", result);
@@ -46,4 +72,46 @@ bool_t create_instance (void)
 	}
 
 	return true;
+}
+
+
+
+
+const char **get_extensions (uint32_t *length)
+{
+	const char **extensions		= NULL;
+	uint32_t extension_count	= 0;
+
+	// glfw extensions
+	const char **glfw_extensions = NULL;
+	uint32_t glfw_count = 0;
+	glfw_extensions = glfwGetRequiredInstanceExtensions (&glfw_count);
+	if (glfw_extensions == NULL) { return NULL; }
+
+	for (uint32_t i = 0; i < glfw_count; i++)
+	{
+		ADD_ITEM(extensions, extension_count, glfw_extensions[i]);
+	}
+
+	if (length != NULL)
+	{
+		(*length) = extension_count;
+	}
+
+	return extensions;
+}
+
+const char **get_layers (uint32_t *length)
+{
+	const char **layers		= NULL;
+	uint32_t layer_count	= 0;
+
+	
+
+	if (length != NULL)
+	{
+		(*length) = layer_count;
+	}
+	
+	return layers;
 }
