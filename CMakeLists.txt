@@ -1,15 +1,16 @@
 cmake_minimum_required(VERSION 3.10)
-project(Vulkan_Renderer)
+project("Vulkan_Renderer")
 
-# Third Party
-include_directories("src/Third Party/GLM/Headers")
+set (CMAKE_C_STANDARD 99)
+set (CMAKE_C_STANDARD_REQUIRED ON)
+set (CMAKE_C_EXTENSIONS OFF)
 
+file (GLOB_RECURSE SOURCES "src/*.c")
 
-# Headers
-include_directories("src/Renderer/Headers")
-include_directories("src/Project/Headers")
+add_executable (${PROJECT_NAME} ${SOURCES})
 
+target_include_directories (${PROJECT_NAME} PRIVATE "${CMAKE_SOURCE_DIR}/include")
 
-# Subsystems
-add_subdirectory(src/Renderer)
-add_subdirectory(src/Project)
+set_target_properties (${PROJECT_NAME} PROPERTIES
+	RUNTIME_OUTPUT_DIRECTORY	"${CMAKE_SOURCE_DIR}/OUT"
+)
